@@ -1,0 +1,59 @@
+import java.util.*;
+public class Main
+{
+    public static void conqur(int arr[],int si,int mid,int ei)
+    {
+        int newAr[]=new int[ei-si+1];
+        int st1=si;
+        int st2=mid+1;
+        int x=0;
+        while(st1<=mid &&st2<=ei)
+        {
+            if(arr[st1]<=arr[st2])
+            {
+                newAr[x++]=arr[st1++];
+            }
+            else{
+                newAr[x++]=arr[st2++];
+            }
+        }
+        while(st1<=mid)
+        {
+            newAr[x++]=arr[st1++];
+        }
+        while(st2<=ei)
+        {
+            newAr[x++]=arr[st2++];
+        }
+        int i;
+        int j;
+        
+        for(i=0,j=si;i<newAr.length;i++,j++)
+        {
+            arr[j]=newAr[i];
+        }
+        return;
+        
+    }
+    public static void mergeS(int arr[],int si,int ei)
+    {
+        if(si>=ei)
+        {
+            return;
+        }
+        int mid=(si+ei)/2;
+        mergeS(arr,si,mid);
+        mergeS(arr,mid+1,ei);
+        conqur(arr,si,mid,ei);
+    }
+	public static void main(String[] args) {
+// 		System.out.println("Hello World");/
+	
+	    int[] arr={3,5,4,1,5,7,21};
+	    mergeS(arr,0,6);
+	    for(int i=0;i<arr.length;i++)
+	    {
+	        System.out.print(arr[i]+" ");
+	    }
+	}
+}
